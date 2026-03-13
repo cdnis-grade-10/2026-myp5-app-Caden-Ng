@@ -26,12 +26,38 @@
  */
 
 import UIKit
+import Charts
 
 class ViewControllerTwo: UIViewController {
     
     // MARK: - IBOutlets
     
-    
+    struct DonutData: Identifiable {
+        let id = UUID()
+        let category: String
+        let value: Double
+    }
+
+    let data = [
+        DonutData(category: "A", value: 40),
+        DonutData(category: "B", value: 30),
+        DonutData(category: "C", value: 30)
+    ]
+
+    // 2. SwiftUI View
+    struct DonutChartView: View {
+        var body: some View {
+            Chart(data) {
+                SectorMark(
+                    angle: .value("Value", $0.value),
+                    innerRadius: .ratio(0.6), // <--- THIS MAKES IT A DONUT
+                    angularInset: 2
+                )
+                .foregroundStyle(by: .value("Category", $0.category))
+                .cornerRadius(5)
+            }
+        }
+    }
     
     // MARK: - Variables and Constants
     

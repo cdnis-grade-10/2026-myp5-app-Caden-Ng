@@ -1,23 +1,21 @@
-//
-//  ViewControllerFour.swift
-//  StarterProjectMultipleViews
-//
-//  Created by Caden Ng on 4/3/2026.
-//
-
 import UIKit
 
-class ViewControllerFour: UITableViewCell {
+class ViewControllerFour: UIViewController {
+    
+    // MARK: - IBOutlets
+    
+    
+    
+    // MARK: - Variables and Constants
+    
+    
+    
+    // MARK: - IBActions and Functions
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+        // Do any additional setup after loading the view.
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
+
