@@ -39,6 +39,16 @@ class ViewControllerThree: UIViewController {
     
     // MARK: - IBActions and Functions
     
+    @IBAction func buttonPressed(_ sender: Any) {
+        excerciseChosen = (sender as AnyObject).tag
+    }
+    
+    
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

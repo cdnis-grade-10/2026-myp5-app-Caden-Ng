@@ -26,21 +26,13 @@
  */
 
 import UIKit
+import Foundation
+
 
 
 class ViewControllerOne: UIViewController {
     
     // MARK: - IBOutlets
-    
-    @IBOutlet weak var diabetesBool: UIButton!
-    @IBOutlet weak var eczemaBool: UIButton!
-    @IBOutlet weak var saltBool: UIButton!
-    @IBOutlet weak var sugarBool: UIButton!
-    @IBOutlet weak var nutsBool: UIButton!
-    @IBOutlet weak var eggsBool: UIButton!
-    @IBOutlet weak var meatsBool: UIButton!
-    @IBOutlet weak var fishBool: UIButton!
-    @IBOutlet weak var shellfishBool: UIButton!
     
     @IBOutlet weak var hipsBool: UIButton!
     @IBOutlet weak var kneesBool: UIButton!
@@ -53,71 +45,65 @@ class ViewControllerOne: UIViewController {
     @IBOutlet weak var fatLossBool: UISwitch!
     @IBOutlet weak var muscleGainBool: UISwitch!
     
-    @IBOutlet weak var heightInt: UISlider!
     @IBOutlet weak var weightInt: UISlider!
+    @IBOutlet weak var ageInt: UISlider!
+    
+    
+    @IBOutlet weak var weightLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
     
     // MARK: - Variables and Constants
     
-    
-    
-    
+
     
     
     
     
     // MARK: - IBActions and Functions
-    var userInformation: [String: Any] = [
-        "diabetes": false,
-        "eczema": false,
-        "salt": false,
-        "sugar": false,
-        "nuts": false,
-        "eggs": false,
-        "meats": false,
-        "fish": false,
-        "shellfish": false,
-
-        "hips": false,
-        "knees": false,
-        "ankles": false,
-        "shoulders": false,
-        "chest": false,
-        "arm": false,
-
-        "fatLoss": true,
-        "muscleGain": true,
-
-        "height": 0.0,
-        "weight": 0.0
-    ]
     
-    @IBAction func bodySlider(_ sender: Any) {
-        if sender as! UISlider == heightInt{
-            userInformation["height"] = heightInt
-        }
-        else if sender as! UISlider == weightInt{
-            userInformation["weight"] = weightInt
-        }
-        
+    // Connect each slider's "Value Changed" to its corresponding action
+
+    
+    @IBAction func weightChanged(_ sender: UISlider) {
+        weight = sender.value
+        weightLabel.text = String(format: "%.0f", sender.value)
     }
     
+    @IBAction func ageChanged(_ sender: UISlider) {
+        age = sender.value
+        ageLabel.text = String(format: "%.0f", sender.value)
+    }
     
+    // Store Bool values, not the UISwitch itself
+    @IBAction func fatLossAction(_ sender: UISwitch) {
+        userInformation[15] = sender.isOn
+    }
     
-
+    @IBAction func muscleGainAction(_ sender: UISwitch) {
+        userInformation[16] = sender.isOn
+    }
     
-    
-    
-    
-    
-    @IBAction func allergyChangeBool(_ sender: Any) {
+    // Toggle the allergy state and update button color
+    @IBAction func allergyChangeBool(_ sender: UIButton) {
+        // Attempt to get the current value as Bool; default to false if missing or not Bool
+        let currentState = userInformation[sender.tag] ?? false
         
+        // Toggle the state
+        let newState = !currentState
+        userInformation[sender.tag] = newState
+        
+        // Update button color based on new state
+        if newState {
+            sender.tintColor = UIColor.red
+        } else {
+            sender.tintColor = UIColor.systemBlue
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
 
 
 }
-
