@@ -26,24 +26,84 @@
  */
 
 import UIKit
+import Foundation
+
+
 
 class ViewControllerOne: UIViewController {
     
     // MARK: - IBOutlets
     
+    @IBOutlet weak var hipsBool: UIButton!
+    @IBOutlet weak var kneesBool: UIButton!
+    @IBOutlet weak var anklesBool: UIButton!
+    @IBOutlet weak var shouldersBool: UIButton!
+    @IBOutlet weak var chestBool: UIButton!
+    @IBOutlet weak var armBool: UIButton!
     
+    
+    @IBOutlet weak var fatLossBool: UISwitch!
+    @IBOutlet weak var muscleGainBool: UISwitch!
+    
+    @IBOutlet weak var weightInt: UISlider!
+    @IBOutlet weak var ageInt: UISlider!
+    
+    
+    @IBOutlet weak var weightLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
     
     // MARK: - Variables and Constants
+    
+
+    
     
     
     
     // MARK: - IBActions and Functions
     
+    // Connect each slider's "Value Changed" to its corresponding action
+
+    
+    @IBAction func weightChanged(_ sender: UISlider) {
+        weight = sender.value
+        weightLabel.text = String(format: "%.0f", sender.value)
+    }
+    
+    @IBAction func ageChanged(_ sender: UISlider) {
+        age = sender.value
+        ageLabel.text = String(format: "%.0f", sender.value)
+    }
+    
+    // Store Bool values, not the UISwitch itself
+    @IBAction func fatLossAction(_ sender: UISwitch) {
+        userInformation[15] = sender.isOn
+    }
+    
+    @IBAction func muscleGainAction(_ sender: UISwitch) {
+        userInformation[16] = sender.isOn
+    }
+    
+    // Toggle the allergy state and update button color
+    @IBAction func allergyChangeBool(_ sender: UIButton) {
+        // Attempt to get the current value as Bool; default to false if missing or not Bool
+        let currentState = userInformation[sender.tag] ?? false
+        
+        // Toggle the state
+        let newState = !currentState
+        userInformation[sender.tag] = newState
+        
+        // Update button color based on new state
+        if newState {
+            sender.tintColor = UIColor.red
+        } else {
+            sender.tintColor = UIColor.systemBlue
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
 
 
 }
-
